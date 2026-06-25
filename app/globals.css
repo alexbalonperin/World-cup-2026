@@ -61,6 +61,10 @@ header p {
   background: #b9892a;
 }
 
+section {
+  scroll-margin-top: 8px;
+}
+
 .day-header {
   position: sticky;
   top: 0;
@@ -184,6 +188,11 @@ header p {
   background: rgba(249, 179, 210, 0.12);
   color: var(--bbc);
   border: 1px solid rgba(249, 179, 210, 0.4);
+}
+.watch a.highlights {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.45);
 }
 
 footer {

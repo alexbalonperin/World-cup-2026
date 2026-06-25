@@ -1,9 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { MatchView } from "@/lib/join";
-import { WATCH_URLS, mergeScores, type LiveScore, type ScoreRecord } from "@/lib/join";
-import { toJst } from "@/lib/jst";
+import {
+  WATCH_URLS,
+  fifaHighlightsUrl,
+  mergeScores,
+  type LiveScore,
+  type ScoreRecord,
+} from "@/lib/join";
+import { toJst, todayJstDayKey } from "@/lib/jst";
 
 const POLL_MS = 45_000;
 
@@ -46,10 +52,14 @@ export default function MatchList({ matches }: { matches: MatchView[] }) {
   const [scores, setScores] = useState<Record<string, LiveScore>>({});
   const [stale, setStale] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+  // null until mounted, so server and first client render agree (no hydration
+  // mismatch); the time-based "is this match past?" check only runs client-side.
+  const [now, setNow] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
     async function poll() {
+      setNow(Date.now());
       try {
         const res = await fetch("/api/scores", { cache: "no-store" });
         const data = (await res.json()) as ScoresResponse;
@@ -84,19 +94,37 @@ export default function MatchList({ matches }: { matches: MatchView[] }) {
       const tb = b.kickoffUtc ? Date.parse(b.kickoffUtc) : Infinity;
       return ta - tb;
     });
-    const out: { label: string; items: MatchView[] }[] = [];
-    let current: { label: string; items: MatchView[] } | null = null;
+    const out: { label: string; dayKey: string; items: MatchView[] }[] = [];
+    let current: { label: string; dayKey: string; items: MatchView[] } | null = null;
     for (const m of sorted) {
       const jst = toJst(m.kickoffUtc);
       const label = jst ? jst.date : "Date TBD";
+      const dayKey = jst ? jst.dayKey : "9999-99-99"; // TBD sinks to the end
       if (!current || current.label !== label) {
-        current = { label, items: [] };
+        current = { label, dayKey, items: [] };
         out.push(current);
       }
       current.items.push(m);
     }
     return out;
   }, [matches]);
+
+  // On first load, jump to today's matches (or the next upcoming day if today
+  // has none). Keyed by JST day so it matches the group headers.
+  const sectionRefs = useRef(new Map<string, HTMLElement>());
+  const didScroll = useRef(false);
+  useEffect(() => {
+    if (didScroll.current || groups.length === 0) return;
+    const today = todayJstDayKey();
+    const target =
+      groups.find((g) => g.dayKey >= today) ?? groups[groups.length - 1];
+    const el = sectionRefs.current.get(target.dayKey);
+    if (el) {
+      // 'auto' (instant) so the user lands on today without a long animated scroll.
+      el.scrollIntoView({ block: "start", behavior: "auto" });
+      didScroll.current = true;
+    }
+  }, [groups]);
 
   return (
     <>
@@ -110,11 +138,26 @@ export default function MatchList({ matches }: { matches: MatchView[] }) {
       </div>
 
       {groups.map((g) => (
-        <section key={g.label}>
+        <section
+          key={g.label}
+          ref={(el) => {
+            if (el) sectionRefs.current.set(g.dayKey, el);
+            else sectionRefs.current.delete(g.dayKey);
+          }}
+        >
           <div className="day-header">{g.label}</div>
           {g.items.map((m) => {
             const jst = toJst(m.kickoffUtc);
             const cell = cellFor(m, scores[m.id]);
+            // "Past" = finished, or kicked off well over a match-length ago and
+            // not currently live. Needs real team names for the search query.
+            const isPast =
+              cell.kind === "ft" ||
+              (cell.kind !== "live" &&
+                m.kickoffUtc != null &&
+                now != null &&
+                now - Date.parse(m.kickoffUtc) > 2.5 * 60 * 60 * 1000);
+            const showHighlights = m.resolved && isPast;
             return (
               <article className="match" key={m.id}>
                 <div className="kickoff">
@@ -149,6 +192,17 @@ export default function MatchList({ matches }: { matches: MatchView[] }) {
                     {m.bbcIplayer && (
                       <a className="bbc" href={WATCH_URLS.bbcIplayer} target="_blank" rel="noreferrer">
                         BBC iPlayer
+                      </a>
+                    )}
+                    {showHighlights && (
+                      <a
+                        className="highlights"
+                        href={fifaHighlightsUrl(m.team1, m.team2)}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="FIFA official highlights"
+                      >
+                        ▶ Highlights
                       </a>
                     )}
                   </div>

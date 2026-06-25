@@ -10,6 +10,16 @@ export const WATCH_URLS = {
   bbcIplayer: "https://www.bbc.co.uk/iplayer",
 } as const;
 
+/**
+ * Link to FIFA's official highlights for a finished match. There is no public
+ * per-match FIFA deep link, so we build a pre-filled YouTube search that lands
+ * on FIFA's official "Extended Highlights" reel (posted on the FIFA channel).
+ */
+export function fifaHighlightsUrl(team1: string, team2: string): string {
+  const q = `FIFA ${team1} vs ${team2} Highlights World Cup 2026`;
+  return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+}
+
 /** One entry per match in data/broadcasts.json, keyed by team-pair key. */
 export interface BroadcastRecord {
   chv: boolean;
