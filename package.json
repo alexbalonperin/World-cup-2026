@@ -1,0 +1,26 @@
+{
+  "name": "world-cup-2026-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Track World Cup 2026 matches: kickoff times in JST, live scores, and where to watch (Chilevisión / BBC iPlayer).",
+  "scripts": {
+    "dev": "next dev",
+    "scrape:broadcasts": "node scripts/scrape-broadcasts.mjs",
+    "prebuild": "node scripts/scrape-broadcasts.mjs || echo \"scrape failed, using committed data/broadcasts.json\"",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "20.14.10",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "cheerio": "1.0.0-rc.12",
+    "typescript": "5.5.3"
+  }
+}

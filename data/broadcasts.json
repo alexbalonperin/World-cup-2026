@@ -1,0 +1,290 @@
+{
+  "algeria~argentina": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "algeria~austria": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "algeria~jordan": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "argentina~austria": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "argentina~jordan": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "australia~paraguay": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "australia~turkey": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "australia~united states": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "austria~jordan": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "belgium~egypt": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "belgium~iran": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "belgium~new zealand": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "bosnia and herzegovina~canada": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "bosnia and herzegovina~qatar": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "bosnia and herzegovina~switzerland": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "brazil~haiti": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "brazil~morocco": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "brazil~scotland": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "canada~qatar": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "canada~south africa": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "canada~switzerland": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "cape verde~saudi arabia": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "cape verde~spain": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "cape verde~uruguay": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "colombia~dr congo": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "colombia~portugal": {
+    "chv": true,
+    "bbcIplayer": true
+  },
+  "colombia~uzbekistan": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "croatia~england": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "croatia~ghana": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "croatia~panama": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "curacao~ecuador": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "curacao~germany": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "curacao~ivory coast": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "czech republic~mexico": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "czech republic~south africa": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "czech republic~south korea": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "dr congo~portugal": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "dr congo~uzbekistan": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "ecuador~germany": {
+    "chv": true,
+    "bbcIplayer": true
+  },
+  "ecuador~ivory coast": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "egypt~iran": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "england~ghana": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "england~panama": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "france~iraq": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "france~norway": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "france~senegal": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "germany~ivory coast": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "ghana~panama": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "haiti~morocco": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "haiti~scotland": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "iran~new zealand": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "iraq~norway": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "iraq~senegal": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "japan~netherlands": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "japan~sweden": {
+    "chv": false,
+    "bbcIplayer": true
+  },
+  "japan~tunisia": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "mexico~south africa": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "mexico~south korea": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "morocco~scotland": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "netherlands~sweden": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "netherlands~tunisia": {
+    "chv": true,
+    "bbcIplayer": true
+  },
+  "norway~senegal": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "paraguay~turkey": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "paraguay~united states": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "portugal~uzbekistan": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "qatar~switzerland": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "saudi arabia~spain": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "saudi arabia~uruguay": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "south africa~south korea": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "spain~uruguay": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "sweden~tunisia": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "turkey~united states": {
+    "chv": false,
+    "bbcIplayer": false
+  }
+}
