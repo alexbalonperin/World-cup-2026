@@ -39,3 +39,8 @@ export function toJst(isoUtc: string | null): JstParts | null {
     dayKey: DAY_KEY_FMT.format(d),
   };
 }
+
+/** Today's day key ("YYYY-MM-DD") in Asia/Tokyo. Comparable to JstParts.dayKey. */
+export function todayJstDayKey(now: Date = new Date()): string {
+  return DAY_KEY_FMT.format(now);
+}

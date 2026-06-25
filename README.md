@@ -34,6 +34,25 @@ Get a free API key at <https://www.football-data.org/client/register> and put it
 fixtures, JST times, watch links, and final scores from the committed snapshot, with a
 "scores temporarily unavailable" notice instead of live updates.
 
+## Install as a mobile app (PWA)
+
+The app is an installable Progressive Web App. On a deployed (HTTPS) URL:
+
+- **iOS (Safari):** Share → **Add to Home Screen**. Launches full-screen with the
+  app icon and no browser chrome.
+- **Android / desktop Chrome:** tap the **Install** icon in the address bar (or
+  ⋮ → *Install app*).
+
+It also works offline: fixtures, JST times, and watch links render from a cached
+app shell, and live scores fall back to the last fetched values.
+
+Icons live in `public/` and are generated (no dependencies) by
+`scripts/gen-icons.mjs`. To regenerate them after a design tweak:
+
+```bash
+npm run gen:icons
+```
+
 ## Deploy (Vercel)
 
 1. Import the repo into Vercel.

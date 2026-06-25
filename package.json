@@ -5,6 +5,7 @@
   "description": "Track World Cup 2026 matches: kickoff times in JST, live scores, and where to watch (Chilevisión / BBC iPlayer).",
   "scripts": {
     "dev": "next dev",
+    "gen:icons": "node scripts/gen-icons.mjs",
     "scrape:broadcasts": "node scripts/scrape-broadcasts.mjs",
     "prebuild": "node scripts/scrape-broadcasts.mjs || echo \"scrape failed, using committed data/broadcasts.json\"",
     "build": "next build",
