@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { MatchView } from "@/lib/join";
 import {
   WATCH_URLS,
@@ -11,7 +11,9 @@ import {
 } from "@/lib/join";
 import { toJst, todayJstDayKey } from "@/lib/jst";
 
-const POLL_MS = 45_000;
+// Matches the scores route's 30s upstream cache (revalidate = 30), so this adds
+// no upstream load — responses are shared and cached server-side.
+const POLL_MS = 30_000;
 
 interface ScoresResponse {
   scores: ScoreRecord[];
@@ -52,40 +54,67 @@ export default function MatchList({ matches }: { matches: MatchView[] }) {
   const [scores, setScores] = useState<Record<string, LiveScore>>({});
   const [stale, setStale] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
   // null until mounted, so server and first client render agree (no hydration
   // mismatch); the time-based "is this match past?" check only runs client-side.
   const [now, setNow] = useState<number | null>(null);
 
-  useEffect(() => {
-    let cancelled = false;
-    async function poll() {
-      setNow(Date.now());
-      try {
-        const res = await fetch("/api/scores", { cache: "no-store" });
-        const data = (await res.json()) as ScoresResponse;
-        if (cancelled) return;
-        if (data.scores?.length) setScores(mergeScores(matches, data.scores));
-        setStale(!!data.stale);
-        setLastUpdated(
-          new Intl.DateTimeFormat("en-GB", {
-            timeZone: "Asia/Tokyo",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-          }).format(new Date())
-        );
-      } catch {
-        if (!cancelled) setStale(true);
-      }
+  // Single source of truth for fetching scores, shared by the interval, the
+  // foreground listeners, and the manual refresh button. A ref guards against
+  // overlapping fetches (e.g. a tap while the interval is mid-flight).
+  const inFlight = useRef(false);
+  const refresh = useCallback(async () => {
+    if (inFlight.current) return;
+    inFlight.current = true;
+    setRefreshing(true);
+    setNow(Date.now());
+    try {
+      const res = await fetch("/api/scores", { cache: "no-store" });
+      const data = (await res.json()) as ScoresResponse;
+      if (data.scores?.length) setScores(mergeScores(matches, data.scores));
+      setStale(!!data.stale);
+      setLastUpdated(
+        new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Tokyo",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        }).format(new Date())
+      );
+    } catch {
+      setStale(true);
+    } finally {
+      inFlight.current = false;
+      setRefreshing(false);
     }
-    poll();
-    const id = setInterval(poll, POLL_MS);
-    return () => {
-      cancelled = true;
-      clearInterval(id);
-    };
   }, [matches]);
+
+  // Poll on mount and on a fixed interval while the app is open.
+  useEffect(() => {
+    refresh();
+    const id = setInterval(refresh, POLL_MS);
+    return () => clearInterval(id);
+  }, [refresh]);
+
+  // The fix for stale data on an installed PWA: timers are frozen while the app
+  // is backgrounded, so re-fetch the moment it returns to the foreground.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    const onPageShow = () => refresh(); // iOS bfcache restore on app resume
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("pageshow", onPageShow);
+    window.addEventListener("focus", onVisible);
+    window.addEventListener("online", refresh);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("pageshow", onPageShow);
+      window.removeEventListener("focus", onVisible);
+      window.removeEventListener("online", refresh);
+    };
+  }, [refresh]);
 
   // Sort by kickoff, then group by JST day.
   const groups = useMemo(() => {
@@ -212,6 +241,22 @@ export default function MatchList({ matches }: { matches: MatchView[] }) {
           })}
         </section>
       ))}
+
+      <button
+        type="button"
+        className={`refresh-fab${refreshing ? " spinning" : ""}`}
+        onClick={refresh}
+        disabled={refreshing}
+        aria-label="Refresh scores"
+        title="Refresh scores"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M12 6V3L8 7l4 4V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-6z"
+          />
+        </svg>
+      </button>
     </>
   );
 }

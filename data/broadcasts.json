@@ -15,9 +15,17 @@
     "chv": true,
     "bbcIplayer": false
   },
+  "argentina~cape verde": {
+    "chv": false,
+    "bbcIplayer": false
+  },
   "argentina~jordan": {
     "chv": false,
     "bbcIplayer": true
+  },
+  "australia~egypt": {
+    "chv": false,
+    "bbcIplayer": false
   },
   "australia~paraguay": {
     "chv": true,
@@ -47,6 +55,10 @@
     "chv": false,
     "bbcIplayer": true
   },
+  "belgium~tbd": {
+    "chv": false,
+    "bbcIplayer": false
+  },
   "bosnia and herzegovina~canada": {
     "chv": true,
     "bbcIplayer": false
@@ -59,8 +71,20 @@
     "chv": true,
     "bbcIplayer": false
   },
+  "bosnia and herzegovina~united states": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "bosnia herzegovina~united states": {
+    "chv": false,
+    "bbcIplayer": false
+  },
   "brazil~haiti": {
     "chv": false,
+    "bbcIplayer": false
+  },
+  "brazil~japan": {
+    "chv": true,
     "bbcIplayer": false
   },
   "brazil~morocco": {
@@ -129,7 +153,7 @@
   },
   "curacao~ivory coast": {
     "chv": false,
-    "bbcIplayer": true
+    "bbcIplayer": false
   },
   "czech republic~mexico": {
     "chv": true,
@@ -153,7 +177,7 @@
   },
   "ecuador~germany": {
     "chv": true,
-    "bbcIplayer": true
+    "bbcIplayer": false
   },
   "ecuador~ivory coast": {
     "chv": true,
@@ -183,7 +207,23 @@
     "chv": true,
     "bbcIplayer": false
   },
+  "france~sweden": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "france~tbd": {
+    "chv": true,
+    "bbcIplayer": false
+  },
   "germany~ivory coast": {
+    "chv": true,
+    "bbcIplayer": false
+  },
+  "germany~paraguay": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "germany~tbd": {
     "chv": true,
     "bbcIplayer": false
   },
@@ -211,13 +251,17 @@
     "chv": false,
     "bbcIplayer": false
   },
+  "ivory coast~norway": {
+    "chv": true,
+    "bbcIplayer": false
+  },
   "japan~netherlands": {
     "chv": true,
     "bbcIplayer": false
   },
   "japan~sweden": {
     "chv": false,
-    "bbcIplayer": true
+    "bbcIplayer": false
   },
   "japan~tunisia": {
     "chv": true,
@@ -231,6 +275,14 @@
     "chv": false,
     "bbcIplayer": false
   },
+  "mexico~tbd": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "morocco~netherlands": {
+    "chv": false,
+    "bbcIplayer": false
+  },
   "morocco~scotland": {
     "chv": true,
     "bbcIplayer": false
@@ -241,7 +293,7 @@
   },
   "netherlands~tunisia": {
     "chv": true,
-    "bbcIplayer": true
+    "bbcIplayer": false
   },
   "norway~senegal": {
     "chv": true,
@@ -280,6 +332,10 @@
     "bbcIplayer": false
   },
   "sweden~tunisia": {
+    "chv": false,
+    "bbcIplayer": false
+  },
+  "switzerland~tbd": {
     "chv": false,
     "bbcIplayer": false
   },
