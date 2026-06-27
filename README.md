@@ -46,6 +46,11 @@ The app is an installable Progressive Web App. On a deployed (HTTPS) URL:
 It also works offline: fixtures, JST times, and watch links render from a cached
 app shell, and live scores fall back to the last fetched values.
 
+Scores refresh automatically while the app is open, **and immediately whenever
+you reopen/foreground it** (so an installed app never shows stale scores). There
+is also an always-visible refresh button in the bottom-right corner to force an
+update at any time.
+
 Icons live in `public/` and are generated (no dependencies) by
 `scripts/gen-icons.mjs`. To regenerate them after a design tweak:
 

@@ -204,3 +204,43 @@ footer {
 footer a {
   color: var(--accent);
 }
+
+/* Always-visible manual refresh button. Honors the iOS safe area since the
+   layout sets viewportFit: "cover". */
+.refresh-fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.55);
+  background: var(--accent);
+  color: #06202b;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+.refresh-fab:hover {
+  transform: translateY(-1px);
+}
+.refresh-fab:active {
+  transform: translateY(0);
+}
+.refresh-fab:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.refresh-fab.spinning svg {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
