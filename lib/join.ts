@@ -10,14 +10,21 @@ export const WATCH_URLS = {
   bbcIplayer: "https://www.bbc.co.uk/iplayer",
 } as const;
 
+// Official FIFA YouTube channel handle. FIFA posts per-match reels titled
+// "Highlights | <A> <score> <B> | FIFA World Cup 2026" on this channel.
+const FIFA_YT_CHANNEL = "@fifa";
+
 /**
- * Link to FIFA's official highlights for a finished match. There is no public
- * per-match FIFA deep link, so we build a pre-filled YouTube search that lands
- * on FIFA's official "Extended Highlights" reel (posted on the FIFA channel).
+ * Link to the official FIFA YouTube channel's highlights for a finished match.
+ * We scope the search to FIFA's own channel rather than all of YouTube, so the
+ * results can only ever be official FIFA-channel videos. A whole-site search
+ * (the previous behavior) always returns *some* unrelated video even when no
+ * real highlights exist; a channel-scoped search instead shows "no results"
+ * when FIFA hasn't posted that match yet.
  */
 export function fifaHighlightsUrl(team1: string, team2: string): string {
-  const q = `FIFA ${team1} vs ${team2} Highlights World Cup 2026`;
-  return `https://www.youtube.com/results?search_query=${encodeURIComponent(q)}`;
+  const q = `${team1} ${team2} highlights`;
+  return `https://www.youtube.com/${FIFA_YT_CHANNEL}/search?query=${encodeURIComponent(q)}`;
 }
 
 /** One entry per match in data/broadcasts.json, keyed by team-pair key. */
