@@ -53,7 +53,7 @@
   },
   "belgium~new zealand": {
     "chv": false,
-    "bbcIplayer": true
+    "bbcIplayer": false
   },
   "belgium~tbd": {
     "chv": false,
@@ -185,7 +185,7 @@
   },
   "egypt~iran": {
     "chv": false,
-    "bbcIplayer": true
+    "bbcIplayer": false
   },
   "england~ghana": {
     "chv": true,
